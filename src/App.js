@@ -1,12 +1,24 @@
-
-import './App.css';
+import React from 'react';
+import
+{
+	ChakraProvider,
+	Box,
+	Grid,
+	theme,
+} from '@chakra-ui/react';
+import Header from './components/Header';
 
 function App()
 {
 	return (
-		<div className="App">
+		<ChakraProvider theme={theme}>
+			<Box textAlign="center" fontSize="xl">
+				<Grid minH="100vh" >
+					<Header />
 
-		</div>
+				</Grid>
+			</Box>
+		</ChakraProvider>
 	);
 }
 
