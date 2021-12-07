@@ -18,6 +18,7 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import useForceUpdate from 'use-force-update';
 import Basket from './pages/Basket';
+import Catalog from './pages/Catalog';
 
 
 // Create a single supabase client for interacting with your database
@@ -57,6 +58,8 @@ function App()
 	const [categories, setCategories] = useState([])
 	const forceUpdate = useForceUpdate()
 
+
+
 	return (
 		<ChakraProvider theme={theme}>
 			<Box textAlign="center" h="100%" fontSize="xl">
@@ -70,7 +73,7 @@ function App()
 						<Route path="/" element={<Home supabase={supabase} setProducts={setProducts} products={products} />} />
 						<Route path="/profile" element={<Profile supabase={supabase} forceUpdate={forceUpdate} newUsernameInput={newUsernameInput} setNewUsernameInput={setNewUsernameInput} oldPasswordInput={oldPasswordInput} newPasswordInput={newPasswordInput} verifyNewPasswordInput={verifyNewPasswordInput} setNewPasswordInput={setNewPasswordInput} setOldPasswordInput={setOldPasswordInput} setVerifyNewPasswordInput={setVerifyNewPasswordInput} />} />
 						<Route path="/basket" element={<Basket supabase={supabase} forceUpdate={forceUpdate} newUsernameInput={newUsernameInput} setNewUsernameInput={setNewUsernameInput} oldPasswordInput={oldPasswordInput} newPasswordInput={newPasswordInput} verifyNewPasswordInput={verifyNewPasswordInput} setNewPasswordInput={setNewPasswordInput} setOldPasswordInput={setOldPasswordInput} setVerifyNewPasswordInput={setVerifyNewPasswordInput} />} />
-
+						{/* <Route path="/catalog" element={<Catalog supabase={supabase} sex={sex} />} /> */}
 					</Routes>
 				</Box>
 

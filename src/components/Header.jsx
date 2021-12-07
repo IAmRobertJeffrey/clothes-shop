@@ -79,9 +79,9 @@ const Header = ({ categories, setCategories, supabase, products, shoppingBasket,
 				location.pathname !== "/profile" && location.pathname !== "/basket" && location.pathname !== "/login" && location.pathname !== "/register" ?
 					<Box>
 						<ButtonGroup gridGap="5">
-							<Link to="/catalog"><Button variant="link" colorScheme="blue">Men</Button></Link>
-							<Link to="/catalog"><Button variant="link" colorScheme="blue">Women</Button></Link>
-							<Link to="/catalog"><Button variant="link" colorScheme="blue">Unisex</Button></Link>
+							<Link to={`/catalog/men`}><Button variant="link" colorScheme="blue">Men</Button></Link>
+							<Link to={`/catalog/women`}><Button variant="link" colorScheme="blue">Women</Button></Link>
+							<Link to={`/catalog/unisex`}><Button variant="link" colorScheme="blue">Unisex</Button></Link>
 						</ButtonGroup>
 					</Box>
 					:
