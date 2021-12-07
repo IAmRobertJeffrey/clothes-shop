@@ -4,9 +4,6 @@ import { Box } from '@chakra-ui/layout';
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
-import { MdOutlineShoppingBasket } from 'react-icons/md'
-import { IconButton } from '@chakra-ui/button';
-import { Icon } from '@chakra-ui/icon';
 import { FaShoppingBasket } from 'react-icons/fa'
 import { useLocation } from 'react-router-dom'
 

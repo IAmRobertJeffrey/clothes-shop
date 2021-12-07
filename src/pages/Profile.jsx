@@ -6,10 +6,11 @@ import { Input } from '@chakra-ui/input'
 import { Text } from '@chakra-ui/layout'
 import { Button } from '@chakra-ui/button'
 import { useEffect } from 'react'
+import { useColorMode } from '@chakra-ui/color-mode'
 
 const Profile = ({ supabase, forceUpdate, newUsernameInput, setNewUsernameInput, oldPasswordInput, newPasswordInput, verifyNewPasswordInput, setNewPasswordInput, setOldPasswordInput, setVerifyNewPasswordInput }) =>
 {
-
+	const { colorMode } = useColorMode();
 	async function updateUsername(e)
 	{
 		e.preventDefault();
@@ -49,27 +50,27 @@ const Profile = ({ supabase, forceUpdate, newUsernameInput, setNewUsernameInput,
 		<Container w="100%" h="100%" display="flex" alignItems="center">
 			<VStack w="100%" h="100%" display="flex" justifyContent="center" alignItems="center">
 
-				<Container shadow="lg" w="100%" p="10" bg="gray.700" rounded="lg" display="flex" flexDirection="column">
+				<Container shadow="lg" w="100%" p="10" bg={colorMode === "dark" ? "gray.700" : "gray.200"} rounded="lg" display="flex" flexDirection="column">
 
 					<form onSubmit={(e) => updateUsername(e)}>
 						<FormControl >
 							<Text>Change Username</Text>
 							<FormLabel>New Username</FormLabel>
-							<Input type="text" value={newUsernameInput} onChange={(e) => setNewUsernameInput(e.target.value)} placeholder={supabase.auth.currentUser.user_metadata.username} />
-							<Button type="submit" mt="2" bg="teal" w="100%">Submit</Button>
+							<Input focusBorderColor={colorMode === "light" ? "teal.500" : "teal.200"} variant="filled" type="text" value={newUsernameInput} onChange={(e) => setNewUsernameInput(e.target.value)} placeholder={supabase.auth.currentUser.user_metadata.username} />
+							<Button type="submit" mt="2" colorScheme="teal" w="100%">Submit</Button>
 						</FormControl>
 					</form>
-					<Divider my="5" bg="white" />
+
 					<form onSubmit={(e) => updatePassword(e)}>
 						<FormControl>
-							<Text >Change password</Text>
+							<Text mt="10">Change password</Text>
 
 							<FormLabel>New Password</FormLabel>
-							<Input type="password" value={newPasswordInput} onChange={(e) => setNewPasswordInput(e.target.value)} placeholder='Password' />
+							<Input focusBorderColor={colorMode === "light" ? "teal.500" : "teal.200"} variant="filled" type="password" value={newPasswordInput} onChange={(e) => setNewPasswordInput(e.target.value)} placeholder='Password' />
 
 							<FormLabel pt="5">Verify New Password</FormLabel>
-							<Input type="password" value={verifyNewPasswordInput} onChange={(e) => setVerifyNewPasswordInput(e.target.value)} placeholder='Password' />
-							<Button type="submit" mt="2" bg="teal" w="100%">Submit</Button>
+							<Input focusBorderColor={colorMode === "light" ? "teal.500" : "teal.200"} variant="filled" type="password" value={verifyNewPasswordInput} onChange={(e) => setVerifyNewPasswordInput(e.target.value)} placeholder='Password' />
+							<Button type="submit" mt="2" colorScheme="teal" w="100%">Submit</Button>
 						</FormControl>
 					</form>
 
