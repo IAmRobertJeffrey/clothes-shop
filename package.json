@@ -6,6 +6,7 @@
     "@chakra-ui/react": "^1.7.2",
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
+    "@supabase/supabase-js": "^1.28.5",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^10.4.9",
     "@testing-library/user-event": "^12.8.3",
@@ -13,7 +14,9 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^3.11.0",
+    "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
+    "use-force-update": "^1.0.7",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
