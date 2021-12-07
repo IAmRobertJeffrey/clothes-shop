@@ -54,13 +54,14 @@ function App()
 
 	const [shoppingBasket, setShoppingBasket] = useState([])
 	const [products, setProducts] = useState([])
+	const [categories, setCategories] = useState([])
 	const forceUpdate = useForceUpdate()
 
 	return (
 		<ChakraProvider theme={theme}>
 			<Box textAlign="center" h="100%" fontSize="xl">
 				<Box h="100%" display="flex" flexDirection="column">
-					<Header shoppingBasket={shoppingBasket} forceUpdate={forceUpdate} supabase={supabase} isOpenRegister={isOpenRegister} isOpenLogin={isOpenLogin} onOpenLogin={onOpenLogin} onOpenRegister={onOpenRegister} onCloseLogin={onCloseLogin} onCloseRegister={onCloseRegister} />
+					<Header categories={categories} setCategories={setCategories} products={products} shoppingBasket={shoppingBasket} forceUpdate={forceUpdate} supabase={supabase} isOpenRegister={isOpenRegister} isOpenLogin={isOpenLogin} onOpenLogin={onOpenLogin} onOpenRegister={onOpenRegister} onCloseLogin={onCloseLogin} onCloseRegister={onCloseRegister} />
 
 					<RegisterModal onOpen={onOpenRegister} onClose={onCloseRegister} isOpen={isOpenRegister} supabase={supabase} registerEmailInput={registerEmailInput} setRegisterEmailInput={setRegisterEmailInput} registerPasswordInput={registerPasswordInput} setRegisterPasswordInput={setRegisterPasswordInput} registerUsernameInput={registerUsernameInput} setRegisterUsernameInput={setRegisterUsernameInput} initialRef={initialRef} finalRef={finalRef} />
 					<LoginModal onOpen={onOpenLogin} onClose={onCloseLogin} isOpen={isOpenLogin} supabase={supabase} loginEmailInput={loginEmailInput} setLoginEmailInput={setLoginEmailInput} loginPasswordInput={loginPasswordInput} setLoginPasswordInput={setLoginPasswordInput} initialRef={initialRef} finalRef={finalRef} />
