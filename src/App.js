@@ -3,11 +3,9 @@ import
 {
 	ChakraProvider,
 	Box,
-	Grid,
 	theme,
 } from '@chakra-ui/react';
 import Header from './components/Header';
-import { Text } from '@chakra-ui/react'
 import { createClient } from '@supabase/supabase-js'
 import RegisterModal from './components/RegisterModal';
 import LoginModal from './components/LoginModal';
@@ -57,6 +55,7 @@ function App()
 	const [products, setProducts] = useState([])
 	const [categories, setCategories] = useState([])
 	const forceUpdate = useForceUpdate()
+	const [catalogProducts, setCatalogProducts] = useState([]);
 
 
 
@@ -73,7 +72,7 @@ function App()
 						<Route path="/" element={<Home supabase={supabase} setProducts={setProducts} products={products} />} />
 						<Route path="/profile" element={<Profile supabase={supabase} forceUpdate={forceUpdate} newUsernameInput={newUsernameInput} setNewUsernameInput={setNewUsernameInput} oldPasswordInput={oldPasswordInput} newPasswordInput={newPasswordInput} verifyNewPasswordInput={verifyNewPasswordInput} setNewPasswordInput={setNewPasswordInput} setOldPasswordInput={setOldPasswordInput} setVerifyNewPasswordInput={setVerifyNewPasswordInput} />} />
 						<Route path="/basket" element={<Basket supabase={supabase} forceUpdate={forceUpdate} newUsernameInput={newUsernameInput} setNewUsernameInput={setNewUsernameInput} oldPasswordInput={oldPasswordInput} newPasswordInput={newPasswordInput} verifyNewPasswordInput={verifyNewPasswordInput} setNewPasswordInput={setNewPasswordInput} setOldPasswordInput={setOldPasswordInput} setVerifyNewPasswordInput={setVerifyNewPasswordInput} />} />
-						{/* <Route path="/catalog" element={<Catalog supabase={supabase} sex={sex} />} /> */}
+						<Route path="/catalog/:type" element={<Catalog catalogProducts={catalogProducts} setCatalogProducts={setCatalogProducts} supabase={supabase} />} />
 					</Routes>
 				</Box>
 

@@ -9,6 +9,7 @@ import { useLocation } from 'react-router-dom'
 
 const Header = ({ categories, setCategories, supabase, products, shoppingBasket, isOpenRegister, isOpenLogin, forceUpdate, onOpenLogin, onOpenRegister, onCloseLogin, onCloseRegister, setLoginEmailInput, setLoginPasswordInput, }) =>
 {
+	const types = ["men", "women", "unisex"]
 	const location = useLocation()
 	useEffect(() =>
 	{
@@ -31,18 +32,7 @@ const Header = ({ categories, setCategories, supabase, products, shoppingBasket,
 
 	}
 
-	async function handleDeleteAccount()
-	{
 
-		const { data: user, error } = await supabase.auth.api.deleteUser(
-			supabase.auth.currentUser.id,
-			process.env.REACT_APP_SERVICE_KEY
-		)
-		await supabase.auth.signOut()
-		forceUpdate();
-		console.log(user);
-		console.log(error);
-	}
 
 	return (
 		<>
@@ -61,7 +51,7 @@ const Header = ({ categories, setCategories, supabase, products, shoppingBasket,
 									<Link to="/basket"><Button colorScheme='teal' variant="outline"><FaShoppingBasket />&nbsp;{shoppingBasket.length && ` ${shoppingBasket.length}`}</Button></Link>
 									<Link to="/profile"><Button colorScheme='teal' variant='outline'>{supabase.auth.currentUser.user_metadata.username}</Button></Link>
 									<Button onClick={handleLogOut} colorScheme='teal' variant='outline'>Log out</Button>
-									{/* <Button onClick={handleDeleteAccount} colorScheme='teal' variant='outline'>Delete Account</Button> */}
+
 
 								</>
 							)
@@ -79,9 +69,10 @@ const Header = ({ categories, setCategories, supabase, products, shoppingBasket,
 				location.pathname !== "/profile" && location.pathname !== "/basket" && location.pathname !== "/login" && location.pathname !== "/register" ?
 					<Box>
 						<ButtonGroup gridGap="5">
-							<Link to={`/catalog/men`}><Button variant="link" colorScheme="blue">Men</Button></Link>
-							<Link to={`/catalog/women`}><Button variant="link" colorScheme="blue">Women</Button></Link>
-							<Link to={`/catalog/unisex`}><Button variant="link" colorScheme="blue">Unisex</Button></Link>
+
+							<Link to={`/catalog/${types[0]}`}><Button variant="link" colorScheme="blue">Men</Button></Link>
+							<Link to={`/catalog/${types[1]}`}><Button variant="link" colorScheme="blue">Women</Button></Link>
+							<Link to={`/catalog/${types[2]}`}><Button variant="link" colorScheme="blue">Unisex</Button></Link>
 						</ButtonGroup>
 					</Box>
 					:
