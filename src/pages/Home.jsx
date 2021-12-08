@@ -6,7 +6,7 @@ import Masonry from 'react-masonry-css'
 import '../style.css'
 import { Text } from '@chakra-ui/layout'
 
-const Home = ({ supabase, products, setProducts }) =>
+const Home = ({ supabase, products, setProducts, handleAddProduct }) =>
 {
 	const breakpointColumnsObj = {
 		default: 3,
@@ -39,7 +39,7 @@ const Home = ({ supabase, products, setProducts }) =>
 
 					products.map((current) => (
 
-						current.id < 4 && (<Product key={current.id} current={current} />)
+						current.id < 4 && (<Product key={current.id} handleAddProduct={() => handleAddProduct(current)} current={current} />)
 
 
 					))}

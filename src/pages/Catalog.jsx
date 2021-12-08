@@ -6,7 +6,7 @@ import { useParams } from 'react-router'
 import Product from '../components/Product'
 import Masonry from 'react-masonry-css'
 
-const Catalog = ({ supabase, catalogProducts, setCatalogProducts }) =>
+const Catalog = ({ supabase, catalogProducts, setCatalogProducts, handleAddProduct }) =>
 {
 	const breakpointColumnsObj = {
 		default: 3,
@@ -46,9 +46,8 @@ const Catalog = ({ supabase, catalogProducts, setCatalogProducts }) =>
 			<Masonry breakpointCols={breakpointColumnsObj} className="my-masonry-grid"
 				columnClassName="my-masonry-grid_column">
 				{
-
 					catalogProducts.map((current) => (
-						<Product current={current} />
+						<Product key={current.id} handleAddProduct={() => handleAddProduct(current)} current={current} />
 					))
 				}
 			</Masonry>

@@ -17,6 +17,7 @@ import Profile from './pages/Profile';
 import useForceUpdate from 'use-force-update';
 import Basket from './pages/Basket';
 import Catalog from './pages/Catalog';
+import { useEffect } from 'react';
 
 
 // Create a single supabase client for interacting with your database
@@ -57,6 +58,44 @@ function App()
 	const forceUpdate = useForceUpdate()
 	const [catalogProducts, setCatalogProducts] = useState([]);
 
+	function handleAddProduct(productId)
+	{
+		console.log(productId);
+	}
+
+	useEffect(() =>
+	{
+
+
+		async function getBasket()
+		{
+			const { data, error } = await supabase
+				.from('basket')
+				.select(`
+				id,
+				product:product_id ( id, product_name, product_price, image )
+				`)
+
+			console.log(data);
+			if (data)	
+			{
+
+				setShoppingBasket(data)
+			}
+			else
+			{
+				console.log(error);
+			}
+
+
+		}
+
+		getBasket(supabase.auth.currentUser.id)
+
+
+
+	}, [setCatalogProducts])
+
 
 
 	return (
@@ -69,10 +108,10 @@ function App()
 					<LoginModal onOpen={onOpenLogin} onClose={onCloseLogin} isOpen={isOpenLogin} supabase={supabase} loginEmailInput={loginEmailInput} setLoginEmailInput={setLoginEmailInput} loginPasswordInput={loginPasswordInput} setLoginPasswordInput={setLoginPasswordInput} initialRef={initialRef} finalRef={finalRef} />
 
 					<Routes>
-						<Route path="/" element={<Home supabase={supabase} setProducts={setProducts} products={products} />} />
+						<Route path="/" element={<Home handleAddProduct={handleAddProduct} supabase={supabase} setProducts={setProducts} products={products} />} />
 						<Route path="/profile" element={<Profile supabase={supabase} forceUpdate={forceUpdate} newUsernameInput={newUsernameInput} setNewUsernameInput={setNewUsernameInput} oldPasswordInput={oldPasswordInput} newPasswordInput={newPasswordInput} verifyNewPasswordInput={verifyNewPasswordInput} setNewPasswordInput={setNewPasswordInput} setOldPasswordInput={setOldPasswordInput} setVerifyNewPasswordInput={setVerifyNewPasswordInput} />} />
-						<Route path="/basket" element={<Basket supabase={supabase} forceUpdate={forceUpdate} newUsernameInput={newUsernameInput} setNewUsernameInput={setNewUsernameInput} oldPasswordInput={oldPasswordInput} newPasswordInput={newPasswordInput} verifyNewPasswordInput={verifyNewPasswordInput} setNewPasswordInput={setNewPasswordInput} setOldPasswordInput={setOldPasswordInput} setVerifyNewPasswordInput={setVerifyNewPasswordInput} />} />
-						<Route path="/catalog/:type" element={<Catalog catalogProducts={catalogProducts} setCatalogProducts={setCatalogProducts} supabase={supabase} />} />
+						<Route path="/basket" element={<Basket shoppingBasket={shoppingBasket} setShoppingBasket={setShoppingBasket} supabase={supabase} forceUpdate={forceUpdate} newUsernameInput={newUsernameInput} setNewUsernameInput={setNewUsernameInput} oldPasswordInput={oldPasswordInput} newPasswordInput={newPasswordInput} verifyNewPasswordInput={verifyNewPasswordInput} setNewPasswordInput={setNewPasswordInput} setOldPasswordInput={setOldPasswordInput} setVerifyNewPasswordInput={setVerifyNewPasswordInput} />} />
+						<Route path="/catalog/:type" element={<Catalog handleAddProduct={handleAddProduct} catalogProducts={catalogProducts} setCatalogProducts={setCatalogProducts} supabase={supabase} />} />
 					</Routes>
 				</Box>
 
