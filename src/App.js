@@ -28,7 +28,6 @@ import { useContext } from 'react';
 
 function App()
 {
-
 	const {
 		isOpen: isOpenRegister,
 		onOpen: onOpenRegister,
