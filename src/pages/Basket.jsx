@@ -14,6 +14,7 @@ const Basket = ({ supabase, shoppingBasket, setShoppingBasket }) =>
 			<Container shadow="md" rounded="lg" justifySelf="center" display="flex" flexDirection="column" p="10" bg="gray.700" w="100%">
 				<List display="flex" flexDirection="column" gridGap="5" >
 					{shoppingBasket.map((current) => (
+
 						<ListItem shadow="md" bg="#FFFFFF0A" rounded="lg" overflow="hidden" display="flex" flexDirection="row" h="150" w="100%" key={current.id}>
 							<Box h="150px" w="150px" display="flex">
 								<Image h="100%" w="100%" objectFit='cover' alt="shopping item" src={current.product.image} />

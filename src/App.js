@@ -6,7 +6,7 @@ import
 	theme,
 } from '@chakra-ui/react';
 import Header from './components/Header';
-import { createClient } from '@supabase/supabase-js'
+
 import RegisterModal from './components/RegisterModal';
 import LoginModal from './components/LoginModal';
 import { useState } from 'react';
@@ -18,10 +18,12 @@ import useForceUpdate from 'use-force-update';
 import Basket from './pages/Basket';
 import Catalog from './pages/Catalog';
 import { useEffect } from 'react';
+import BasketContext from './contexts/BasketContext';
+import { useContext } from 'react';
 
 
 // Create a single supabase client for interacting with your database
-const supabase = createClient(process.env.REACT_APP_SUPABASE_URL, process.env.REACT_APP_SUPABASE_KEY)
+
 
 
 function App()
@@ -52,49 +54,24 @@ function App()
 	const [newPasswordInput, setNewPasswordInput] = useState("")
 	const [verifyNewPasswordInput, setVerifyNewPasswordInput] = useState("")
 
-	const [shoppingBasket, setShoppingBasket] = useState([])
+
 	const [products, setProducts] = useState([])
 	const [categories, setCategories] = useState([])
 	const forceUpdate = useForceUpdate()
 	const [catalogProducts, setCatalogProducts] = useState([]);
 
-	function handleAddProduct(productId)
-	{
-		console.log(productId);
-	}
+	const {
+		setShoppingBasket, shoppingBasket, getBasket, supabase
+	} = useContext(BasketContext);
 
 	useEffect(() =>
 	{
-
-
-		async function getBasket()
+		if (supabase.auth.currentUser)
 		{
-			const { data, error } = await supabase
-				.from('basket')
-				.select(`
-				id,
-				product:product_id ( id, product_name, product_price, image )
-				`)
 
-			console.log(data);
-			if (data)	
-			{
-
-				setShoppingBasket(data)
-			}
-			else
-			{
-				console.log(error);
-			}
-
-
+			getBasket(supabase.auth.currentUser.id)
 		}
-
-		getBasket(supabase.auth.currentUser.id)
-
-
-
-	}, [setCatalogProducts])
+	}, [supabase])
 
 
 
@@ -108,10 +85,10 @@ function App()
 					<LoginModal onOpen={onOpenLogin} onClose={onCloseLogin} isOpen={isOpenLogin} supabase={supabase} loginEmailInput={loginEmailInput} setLoginEmailInput={setLoginEmailInput} loginPasswordInput={loginPasswordInput} setLoginPasswordInput={setLoginPasswordInput} initialRef={initialRef} finalRef={finalRef} />
 
 					<Routes>
-						<Route path="/" element={<Home handleAddProduct={handleAddProduct} supabase={supabase} setProducts={setProducts} products={products} />} />
+						<Route path="/" element={<Home supabase={supabase} setProducts={setProducts} products={products} />} />
 						<Route path="/profile" element={<Profile supabase={supabase} forceUpdate={forceUpdate} newUsernameInput={newUsernameInput} setNewUsernameInput={setNewUsernameInput} oldPasswordInput={oldPasswordInput} newPasswordInput={newPasswordInput} verifyNewPasswordInput={verifyNewPasswordInput} setNewPasswordInput={setNewPasswordInput} setOldPasswordInput={setOldPasswordInput} setVerifyNewPasswordInput={setVerifyNewPasswordInput} />} />
 						<Route path="/basket" element={<Basket shoppingBasket={shoppingBasket} setShoppingBasket={setShoppingBasket} supabase={supabase} forceUpdate={forceUpdate} newUsernameInput={newUsernameInput} setNewUsernameInput={setNewUsernameInput} oldPasswordInput={oldPasswordInput} newPasswordInput={newPasswordInput} verifyNewPasswordInput={verifyNewPasswordInput} setNewPasswordInput={setNewPasswordInput} setOldPasswordInput={setOldPasswordInput} setVerifyNewPasswordInput={setVerifyNewPasswordInput} />} />
-						<Route path="/catalog/:type" element={<Catalog handleAddProduct={handleAddProduct} catalogProducts={catalogProducts} setCatalogProducts={setCatalogProducts} supabase={supabase} />} />
+						<Route path="/catalog/:type" element={<Catalog catalogProducts={catalogProducts} setCatalogProducts={setCatalogProducts} supabase={supabase} />} />
 					</Routes>
 				</Box>
 
