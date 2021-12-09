@@ -4,9 +4,15 @@ import { FormControl } from '@chakra-ui/form-control'
 import { FormLabel } from '@chakra-ui/form-control'
 import { Input } from '@chakra-ui/input'
 import { Button } from '@chakra-ui/button'
+import { useContext } from 'react'
+import BasketContext from '../contexts/BasketContext'
 
-const LoginModal = ({ onClose, isOpen, supabase, initialRef, finalRef, setLoginPasswordInput, loginPasswordInput, setLoginEmailInput, loginEmailInput }) =>
+const LoginModal = ({ onClose, isOpen, initialRef, finalRef, setLoginPasswordInput, loginPasswordInput, setLoginEmailInput, loginEmailInput }) =>
 {
+
+	const {
+		getBasket, supabase
+	} = useContext(BasketContext);
 
 
 	async function handleLogin()
@@ -17,9 +23,11 @@ const LoginModal = ({ onClose, isOpen, supabase, initialRef, finalRef, setLoginP
 			console.log(user);
 			console.log(session);
 			console.log(error);
+			getBasket(supabase.auth.currentUser.id)
 			onClose();
 			setLoginEmailInput("")
 			setLoginPasswordInput("")
+
 		}
 	}
 	function handleClose()

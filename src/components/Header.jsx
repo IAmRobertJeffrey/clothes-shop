@@ -6,11 +6,19 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { FaShoppingBasket } from 'react-icons/fa'
 import { useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react'
+import BasketContext from '../contexts/BasketContext'
 
 const Header = ({ categories, setCategories, supabase, products, shoppingBasket, isOpenRegister, isOpenLogin, forceUpdate, onOpenLogin, onOpenRegister, onCloseLogin, onCloseRegister, setLoginEmailInput, setLoginPasswordInput, }) =>
 {
+
+	const {
+		setShoppingBasket
+	} = useContext(BasketContext);
 	const types = ["men", "women", "unisex"]
 	const location = useLocation()
+	const navigate = useNavigate()
 	useEffect(() =>
 	{
 
@@ -28,6 +36,8 @@ const Header = ({ categories, setCategories, supabase, products, shoppingBasket,
 	async function handleLogOut()
 	{
 		await supabase.auth.signOut()
+		navigate("/")
+		setShoppingBasket([])
 		forceUpdate();
 
 	}

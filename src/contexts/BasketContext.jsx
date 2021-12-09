@@ -4,7 +4,9 @@ import { createClient } from '@supabase/supabase-js'
 const BasketContext = createContext({})
 export const BasketProvidor = ({ children }) =>
 {
+
 	const [shoppingBasket, setShoppingBasket] = useState([])
+
 	const supabase = createClient(process.env.REACT_APP_SUPABASE_URL, process.env.REACT_APP_SUPABASE_KEY)
 	async function handleAddProduct(productId)
 	{
@@ -12,20 +14,39 @@ export const BasketProvidor = ({ children }) =>
 		const { data, error } = await supabase
 			.from('basket')
 			.insert([
-				{ name: 'The Shire', country_id: 554 }
+				{ user_id: supabase.auth.currentUser.id, product_id: productId }
 			])
 
 		console.log(data);
 		if (data)	
 		{
 
-			setShoppingBasket(data)
+			getBasket()
 		}
 		else
 		{
 			console.log(error);
 		}
 
+	}
+
+	async function removeFromBasket(basketProductId)
+	{
+		const { data, error } = await supabase
+			.from('basket')
+			.delete()
+			.match({ id: basketProductId })
+
+		console.log(data);
+		if (data)	
+		{
+
+			getBasket()
+		}
+		else
+		{
+			console.log(error);
+		}
 	}
 
 
@@ -59,8 +80,8 @@ export const BasketProvidor = ({ children }) =>
 			shoppingBasket,
 			setShoppingBasket,
 			getBasket,
-			supabase
-
+			supabase,
+			removeFromBasket
 		}}>
 			{children}
 		</BasketContext.Provider>
