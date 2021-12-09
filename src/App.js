@@ -71,7 +71,7 @@ function App()
 
 			getBasket(supabase.auth.currentUser.id)
 		}
-	}, [])
+	})
 
 
 

@@ -1,4 +1,4 @@
-import { Box, Container, ListIcon, ListItem } from '@chakra-ui/layout'
+import { Box, ListItem } from '@chakra-ui/layout'
 import React from 'react'
 import { Text } from '@chakra-ui/layout'
 import { List } from '@chakra-ui/react'
@@ -10,7 +10,7 @@ import BasketContext from '../contexts/BasketContext'
 const Basket = () =>
 {
 	const {
-		shoppingBasket, getBasket, supabase, removeFromBasket
+		shoppingBasket, removeFromBasket
 	} = useContext(BasketContext);
 
 
@@ -19,11 +19,7 @@ const Basket = () =>
 	useEffect(() =>
 	{
 		let tempPrice = 0;
-		shoppingBasket.map((current) =>
-		{
-			tempPrice += current.product.product_price;
-
-		})
+		shoppingBasket.map((current) => tempPrice += current.product.product_price)
 		setCurrentPriceTotal(tempPrice.toFixed(2))
 	}, [shoppingBasket])
 
