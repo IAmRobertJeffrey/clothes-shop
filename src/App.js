@@ -70,7 +70,8 @@ function App()
 
 			getBasket(supabase.auth.currentUser.id)
 		}
-	})
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 
 
