@@ -17,7 +17,6 @@ export const BasketProvidor = ({ children }) =>
 				{ user_id: supabase.auth.currentUser.id, product_id: productId }
 			])
 
-		console.log(data);
 		if (data)	
 		{
 
