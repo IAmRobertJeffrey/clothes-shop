@@ -6,12 +6,12 @@ import { Input } from '@chakra-ui/input'
 import { Text } from '@chakra-ui/layout'
 import { Button } from '@chakra-ui/button'
 import { useColorMode } from '@chakra-ui/color-mode'
-import { useNavigate } from 'react-router-dom'
+import { useHistory } from "react-router-dom"
 
 const Profile = ({ supabase, forceUpdate, newUsernameInput, setNewUsernameInput, oldPasswordInput, newPasswordInput, verifyNewPasswordInput, setNewPasswordInput, setOldPasswordInput, setVerifyNewPasswordInput }) =>
 {
 	const { colorMode } = useColorMode();
-	const navigate = useNavigate();
+	const history = useHistory();
 	async function updateUsername(e)
 	{
 		e.preventDefault();
@@ -92,7 +92,7 @@ const Profile = ({ supabase, forceUpdate, newUsernameInput, setNewUsernameInput,
 
 				</VStack>
 			</Container>
-			: (navigate("/"))
+			: history.push("/")
 	)
 }
 

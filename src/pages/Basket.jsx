@@ -6,13 +6,13 @@ import { Image } from '@chakra-ui/image'
 import { Button } from '@chakra-ui/button'
 import { useContext, useState, useEffect } from 'react'
 import BasketContext from '../contexts/BasketContext'
-import { useNavigate } from 'react-router-dom'
 import { useColorMode } from '@chakra-ui/react'
+import { useHistory } from "react-router-dom"
 
 const Basket = () =>
 {
 	const { colorMode } = useColorMode();
-	const navigate = useNavigate();
+	const history = useHistory();
 	const {
 		shoppingBasket, removeFromBasket, supabase
 	} = useContext(BasketContext);
@@ -59,7 +59,7 @@ const Basket = () =>
 
 				</Box>
 			</Box>
-			: (navigate("/"))
+			: history.push("/")
 	)
 }
 
