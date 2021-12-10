@@ -97,7 +97,9 @@ const Profile = ({ supabase, forceUpdate, newUsernameInput, setNewUsernameInput,
 
 				</VStack>
 			</Container>
-			: redirectHome()
+			:
+
+			<div onLoadStart={redirectHome()}></div>
 
 	)
 }
