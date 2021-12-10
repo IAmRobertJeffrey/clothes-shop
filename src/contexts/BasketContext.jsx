@@ -10,7 +10,7 @@ export const BasketProvidor = ({ children }) =>
 	const supabase = createClient(process.env.REACT_APP_SUPABASE_URL, process.env.REACT_APP_SUPABASE_KEY)
 	async function handleAddProduct(productId)
 	{
-		console.log(productId);
+
 		const { data, error } = await supabase
 			.from('basket')
 			.insert([
@@ -37,7 +37,7 @@ export const BasketProvidor = ({ children }) =>
 			.delete()
 			.match({ id: basketProductId })
 
-		console.log(data);
+
 		if (data)	
 		{
 
@@ -59,7 +59,7 @@ export const BasketProvidor = ({ children }) =>
 				product:product_id ( id, product_name, product_price, image )
 				`)
 
-		console.log(data);
+
 		if (data)	
 		{
 

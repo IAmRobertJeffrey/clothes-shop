@@ -22,13 +22,13 @@ const Catalog = ({ supabase, catalogProducts, setCatalogProducts, handleAddProdu
 
 		async function getCertainCategory(category)
 		{
-			const { data, error } = await supabase
+			const { data } = await supabase
 				.from('product')
 				.select().like('sex', category)
 
-			console.log(data);
+
 			setCatalogProducts(data)
-			console.log(error);
+
 		}
 
 		const sexes = new Map()
