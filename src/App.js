@@ -20,7 +20,7 @@ import Catalog from './pages/Catalog';
 import { useEffect } from 'react';
 import BasketContext from './contexts/BasketContext';
 import { useContext } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 // Create a single supabase client for interacting with your database
 
@@ -28,6 +28,7 @@ import { useContext } from 'react';
 
 function App()
 {
+	const navigate = useNavigate();
 	const {
 		isOpen: isOpenRegister,
 		onOpen: onOpenRegister,
@@ -86,13 +87,11 @@ function App()
 
 					<Routes>
 						<Route path="/" element={<Home supabase={supabase} setProducts={setProducts} products={products} />} />
-						<Route path="/profile" element={supabase.auth.currentUser ? <Profile supabase={supabase} forceUpdate={forceUpdate} newUsernameInput={newUsernameInput} setNewUsernameInput={setNewUsernameInput} oldPasswordInput={oldPasswordInput} newPasswordInput={newPasswordInput} verifyNewPasswordInput={verifyNewPasswordInput} setNewPasswordInput={setNewPasswordInput} setOldPasswordInput={setOldPasswordInput} setVerifyNewPasswordInput={setVerifyNewPasswordInput} /> : <Home />} />
-						<Route path="/basket" element={supabase.auth.currentUser ? <Basket shoppingBasket={shoppingBasket} setShoppingBasket={setShoppingBasket} supabase={supabase} forceUpdate={forceUpdate} newUsernameInput={newUsernameInput} setNewUsernameInput={setNewUsernameInput} oldPasswordInput={oldPasswordInput} newPasswordInput={newPasswordInput} verifyNewPasswordInput={verifyNewPasswordInput} setNewPasswordInput={setNewPasswordInput} setOldPasswordInput={setOldPasswordInput} setVerifyNewPasswordInput={setVerifyNewPasswordInput} /> : <Home />} />
+						<Route path="/profile" element={supabase.auth.currentUser ? <Profile supabase={supabase} forceUpdate={forceUpdate} newUsernameInput={newUsernameInput} setNewUsernameInput={setNewUsernameInput} oldPasswordInput={oldPasswordInput} newPasswordInput={newPasswordInput} verifyNewPasswordInput={verifyNewPasswordInput} setNewPasswordInput={setNewPasswordInput} setOldPasswordInput={setOldPasswordInput} setVerifyNewPasswordInput={setVerifyNewPasswordInput} /> : navigate("/")} />
+						<Route path="/basket" element={supabase.auth.currentUser ? <Basket shoppingBasket={shoppingBasket} setShoppingBasket={setShoppingBasket} supabase={supabase} forceUpdate={forceUpdate} newUsernameInput={newUsernameInput} setNewUsernameInput={setNewUsernameInput} oldPasswordInput={oldPasswordInput} newPasswordInput={newPasswordInput} verifyNewPasswordInput={verifyNewPasswordInput} setNewPasswordInput={setNewPasswordInput} setOldPasswordInput={setOldPasswordInput} setVerifyNewPasswordInput={setVerifyNewPasswordInput} /> : navigate("/")} />
 						<Route path="/catalog/:type" element={<Catalog catalogProducts={catalogProducts} setCatalogProducts={setCatalogProducts} supabase={supabase} />} />
 					</Routes>
 				</Box>
-
-
 			</Box>
 		</ChakraProvider>
 	);
