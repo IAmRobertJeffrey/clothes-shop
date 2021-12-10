@@ -59,8 +59,7 @@ const Basket = () =>
 
 				</Box>
 			</Box>
-			:
-			navigate("/")
+			: (navigate("/"))
 	)
 }
 

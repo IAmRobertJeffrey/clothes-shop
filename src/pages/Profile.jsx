@@ -92,7 +92,7 @@ const Profile = ({ supabase, forceUpdate, newUsernameInput, setNewUsernameInput,
 
 				</VStack>
 			</Container>
-			: navigate("/")
+			: (navigate("/"))
 	)
 }
 
