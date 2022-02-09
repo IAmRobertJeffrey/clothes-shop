@@ -36,9 +36,9 @@ const Basket = () =>
 	return (
 
 		supabase.auth.currentUser ?
-			<Box height="100%" display="flex" justifyContent="center" width="100%" alignItems="center" flexDirection="column">
+			<Box height="100% - 48px" display="flex" justifyContent="center" width="100%" alignItems="center" flexDirection="column" padding="50px">
 				<Box shadow="md" rounded="lg" justifySelf="center" display="flex" width="50%" maxW="50%" flexDirection="column" bg={colorMode === "dark" ? "gray.700" : "gray.200"} w="100%">
-					<List display="flex" flexDirection="column" maxH="600px" overflow="auto" p="10" gridGap="5" >
+					<List display="flex" flexDirection="column" overflow="auto" p="10" gridGap="5" >
 						{shoppingBasket.map((current) => (
 
 

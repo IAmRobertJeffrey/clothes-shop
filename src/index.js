@@ -8,7 +8,7 @@ import { BasketProvidor } from './contexts/BasketContext';
 
 ReactDOM.render(
 	<StrictMode>
-		<ColorModeScript />
+		<ColorModeScript initialColorMode="dark" />
 		<BrowserRouter>
 			<BasketProvidor>
 				<App />

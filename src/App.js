@@ -3,8 +3,9 @@ import
 {
 	ChakraProvider,
 	Box,
-	theme,
+	ColorModeProvider
 } from '@chakra-ui/react';
+import theme from './theme'
 import Header from './components/Header';
 
 import RegisterModal from './components/RegisterModal';
@@ -93,7 +94,8 @@ function App()
 					</Routes>
 				</Box>
 			</Box>
-		</ChakraProvider>
+
+		</ChakraProvider >
 	);
 }
 
