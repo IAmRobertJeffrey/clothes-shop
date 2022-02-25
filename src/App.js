@@ -1,10 +1,5 @@
 import React from 'react';
-import
-{
-	ChakraProvider,
-	Box,
-	ColorModeProvider
-} from '@chakra-ui/react';
+import { ChakraProvider, Box } from '@chakra-ui/react';
 import theme from './theme'
 import Header from './components/Header';
 
@@ -21,25 +16,12 @@ import Catalog from './pages/Catalog';
 import { useEffect } from 'react';
 import BasketContext from './contexts/BasketContext';
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-// Create a single supabase client for interacting with your database
-
-
 
 function App()
 {
-	const navigate = useNavigate();
-	const {
-		isOpen: isOpenRegister,
-		onOpen: onOpenRegister,
-		onClose: onCloseRegister
-	} = useDisclosure()
-	const {
-		isOpen: isOpenLogin,
-		onOpen: onOpenLogin,
-		onClose: onCloseLogin
-	} = useDisclosure()
+	const { isOpen: isOpenRegister, onOpen: onOpenRegister, onClose: onCloseRegister } = useDisclosure()
+	const { isOpen: isOpenLogin, onOpen: onOpenLogin, onClose: onCloseLogin } = useDisclosure()
+
 	const initialRef = React.useRef()
 	const finalRef = React.useRef()
 
@@ -55,15 +37,12 @@ function App()
 	const [newPasswordInput, setNewPasswordInput] = useState("")
 	const [verifyNewPasswordInput, setVerifyNewPasswordInput] = useState("")
 
-
 	const [products, setProducts] = useState([])
 	const [categories, setCategories] = useState([])
 	const forceUpdate = useForceUpdate()
 	const [catalogProducts, setCatalogProducts] = useState([]);
 
-	const {
-		setShoppingBasket, shoppingBasket, getBasket, supabase
-	} = useContext(BasketContext);
+	const { setShoppingBasket, shoppingBasket, getBasket, supabase } = useContext(BasketContext);
 
 	useEffect(() =>
 	{
